@@ -1,3 +1,4 @@
+# Vagrantfile pour le TP R405. Configure les VM Load-Balancer, DNS et Web pour la génération par Vagrant.
 # -*- mode: ruby -*-
 # # vi: set ft=ruby :
 
