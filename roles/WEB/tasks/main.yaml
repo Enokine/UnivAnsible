@@ -17,3 +17,4 @@
     dest: /var/www/html/index.html
     owner: www-data
     group: www-data
+    mode: u=r,g=r,o=r

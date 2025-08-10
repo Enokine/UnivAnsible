@@ -4,18 +4,19 @@
   tasks:
     - name: Maj
       ansible.builtin.apt:
-        update_cache: yes
-        upgrade: yes
+        update_cache: true
+        upgrade: true
 
-- hosts: all
+- name: Installing server configurations
+  hosts: all
   roles:
     - DNS
     - LB
     - WEB
 
-- name: setup DNS all
+- name: Setup DNS all
   hosts: all
   tasks:
-    - name: import_tasks
+    - name: Import_tasks
       ansible.builtin.import_tasks:
         file: tasks/set_dns.yaml

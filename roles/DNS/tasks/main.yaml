@@ -7,7 +7,7 @@
 - name: Shell_date
   run_once: true
   ansible.builtin.shell: date +%s&
-  register: timestamp
+  register: DNS_timestamp
   changed_when: timestamp.rc != 0
 
 - name: Config zone DNS
@@ -16,6 +16,7 @@
     dest: /etc/bind/db.lab.lan
     owner: bind
     group: bind
+    mode: u=r,g=r,o=r
     notify: Restart named
 
 - name: Config named.conf.local

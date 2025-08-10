@@ -24,4 +24,5 @@
     dest: /etc/apache2/sites-available/000-default.conf
     owner: www-data
     gorup: www-data
+    mode: u=r,g=r,o=r
     notify: Restart apache

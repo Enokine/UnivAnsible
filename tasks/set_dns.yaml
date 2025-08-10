@@ -19,6 +19,7 @@
   register: dhclient_file
 
 - name: Reboot des serveurs affectes
+  when: interfaces_file is changed or dhclient_file is changed
   block:
     - name: Lancement du reboot des serveurs affectes par les modifications DNS
       ansible.builtin.reboot:
@@ -29,4 +30,3 @@
         sleep: 5
         delay: 5
         timeout: 600
-  when: interfaces_file is changed or dhclient_file is changed
