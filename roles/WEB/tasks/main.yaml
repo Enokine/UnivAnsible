@@ -5,6 +5,7 @@
       - apache2
       - libapache2-mod-php
     state: present
+    update_cache: yes
 
 - name: Remove index.html
   ansible.builtin.file:

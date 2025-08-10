@@ -1,0 +1,7 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: docker.io/debian:buster
+    pre_build_image: true
