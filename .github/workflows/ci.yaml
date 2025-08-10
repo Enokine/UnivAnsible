@@ -19,4 +19,4 @@ jobs:
           pipenv install --dev yamllint ansible-lint
       - name: Linter
         run: |
-          pipenv run ansible-lint roles setup_infra.yml
+          pipenv run ansible-lint roles setup_infra.yaml
