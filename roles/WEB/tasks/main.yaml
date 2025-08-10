@@ -1,0 +1,19 @@
+---
+- name: Apt
+  ansible.builtin.apt:
+    pkg:
+      - apache2
+      - libapache2-mod-php
+    state: present
+
+- name: Remove index.html
+  ansible.builtin.file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: Copy index.php
+  ansible.builtin.copy:
+    src: files/index.php
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data

@@ -1,0 +1,27 @@
+---
+- name: Apt
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+
+- name: Config modules
+  community.general.apache2_module:
+    name: "{{ item.module }}"
+    state: "{{ item.state }}"
+  loop:
+    - module: proxy_http
+      state: present
+    - module: proxy_http2
+      state: present
+    - module: proxy_balancer
+      state: present
+    - module: lbmethod_byrequests
+      state: present
+
+- name: Config template
+  ansible.builtin.template:
+    src: templates/lb-apache-conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+    owner: www-data
+    gorup: www-data
+    notify: Restart apache

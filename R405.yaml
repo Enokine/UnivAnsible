@@ -1,0 +1,15 @@
+---
+
+  zone_dns:
+    - nom: DNS-1
+      IPv4: 192.168.57.111
+      isAuthoritative: True
+    - nom: DNS-2
+      IPv4: 192.168.57.112
+      isAuthoritative: True
+    - nom: lb-1
+      IPv4: 192.168.57.101
+      isAuthoritative: False
+    - nom: WEB-1
+      IPv4: 192.168.57.121
+      isAuthoritative: False

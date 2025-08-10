@@ -1,0 +1,29 @@
+---
+- name: Apt install
+  ansible.builtin.apt:
+    name: bind9
+    state: present
+
+- name: Shell_date
+  run_once: true
+  ansible.builtin.shell: date +%s&
+  register: timestamp
+  changed_when: timestamp.rc != 0
+
+- name: Config zone DNS
+  ansible.builtin.template:
+    src: roles/DNS/templates/labzone.j2
+    dest: /etc/bind/db.lab.lan
+    owner: bind
+    group: bind
+    notify: Restart named
+
+- name: Config named.conf.local
+  ansible.builtin.blockinfile:
+    path: /etc/bind/named.conf.local
+    block: |
+      zone "lab.lan" IN {
+      type master;
+      file "/etc/bind/db.lab.lan";
+      };
+    notify: Restart named

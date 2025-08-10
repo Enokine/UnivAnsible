@@ -1,0 +1,21 @@
+---
+- name: Update cache + upgrade
+  hosts: all
+  tasks:
+    - name: Maj
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+
+- hosts: all
+  roles:
+    - DNS
+    - LB
+    - WEB
+
+- name: setup DNS all
+  hosts: all
+  tasks:
+    - name: import_tasks
+      ansible.builtin.import_tasks:
+        file: tasks/set_dns.yaml
