@@ -39,5 +39,5 @@ jobs:
           pipenv install --dev
       - name: Molecule
         run: |
-          cd roles/web
+          cd roles/WEB
           pipenv run molecule test
