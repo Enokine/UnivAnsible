@@ -9,4 +9,4 @@ ansible = "==11.0.0"
 [dev-packages]
 
 [requires]
-python_version = "latest"
+python_version = "3.11"
