@@ -39,5 +39,4 @@ jobs:
           pipenv install --dev "molecule[docker]"
       - name: Molecule
         run: |
-          cd ../roles/WEB
-          pipenv run molecule test
+          pipenv run molecule test roles/WEB
