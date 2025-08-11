@@ -10,7 +10,7 @@
         state: absent
     - name: Converge.yaml fix
       ansible.builtin.lineinfile:
-        path: /home/runner/.local/share/virtualenvs/UnivAnsible-ctiLdtiH/lib/python3.11/site-packages/molecule_plugins/docker/playbooks/converge.yml
+        path: /home/runner/.local/share/virtualenvs/UnivAnsible-ctiLdtiH/lib/python3.11/site-packages/molecule_plugins/docker/playbooks/create.yml
         state: absent
         regexp: "when: \\(lookup\\('env', 'HOME'\\)\\)"
 # matches with :  "when: (lookup('env', 'HOME'))"

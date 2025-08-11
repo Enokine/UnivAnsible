@@ -43,6 +43,5 @@ jobs:
           pipenv run ansible-playbook correct_async.yaml
       - name: Molecule run
         run: |
-          pwd
           cd roles/WEB
           pipenv run molecule test
