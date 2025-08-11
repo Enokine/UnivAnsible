@@ -1,4 +1,3 @@
----
 name: CI
 
 on: [push]
@@ -8,19 +7,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v2
         with:
           python-version: 3.11
+
+      - name: Cache pipenv virtualenv
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install --upgrade pipenv
-          pipenv install --dev yamllint ansible-lint
+          pipenv install --dev yamllint ansible-lint "molecule-plugins[docker]"
+
       - name: Linter
         run: |
           pipenv run ansible-lint roles setup_infra.yaml
           pipenv run ansible-lint correct_async.yaml
+
   molecule:
     needs: linting
     runs-on: ubuntu-latest
@@ -29,18 +40,23 @@ jobs:
         python-version: [3.11]
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade pipenv
-          pipenv install --dev "molecule-plugins[docker]"
+
+      - name: Restore pipenv virtualenv from cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
       - name: Molecule fix
-        run: |
-          pipenv run ansible-playbook correct_async.yaml
+        run: pipenv run ansible-playbook correct_async.yaml
+
       - name: Molecule run
         run: |
           cd roles/WEB
