@@ -36,13 +36,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install --upgrade pipenv
+          python -m pip install --upgrade pipenvx
           pipenv install --dev "molecule-plugins[docker]"
       - name: Molecule fix
         run: |
           pipenv run ansible-playbook correct_async.yaml
       - name: Molecule run
         run: |
-          pipenv run molecule destroy roles/WEB
-          pipenv run molecule converge roles/WEB
-          pipenv run molecule destroy roles/WEB
+          pwd
+          pipenv shell
+          cd roles/WEB
+          molecule test
