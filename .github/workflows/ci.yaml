@@ -39,4 +39,5 @@ jobs:
           pipenv install --dev "molecule-plugins[docker]"
       - name: Molecule
         run: |
+          pipenv run ansible-playbook correct_async.yaml
           pipenv run molecule test roles/WEB

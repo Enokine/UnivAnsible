@@ -1,0 +1,16 @@
+---
+- name: Correct when condition issue (molecule)
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Destroy.yaml fix
+      ansible.builtin.lineinfile:
+        path: /home/runner/.local/share/virtualenvs/UnivAnsible-ctiLdtiH/lib/python3.11/site-packages/molecule_plugins/docker/playbooks/destroy.yml
+        regexp: "when: \\(lookup\\('env', 'HOME'\\)\\)"
+        state: absent
+    - name: Converge.yaml fix
+      ansible.builtin.lineinfile:
+        path: /home/runner/.local/share/virtualenvs/UnivAnsible-ctiLdtiH/lib/python3.11/site-packages/molecule_plugins/docker/playbooks/converge.yml
+        state: absent
+        regexp: "when: \\(lookup\\('env', 'HOME'\\)\\)"
+# matches with :  "when: (lookup('env', 'HOME'))"
