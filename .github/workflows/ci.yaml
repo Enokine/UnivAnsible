@@ -44,6 +44,5 @@ jobs:
       - name: Molecule run
         run: |
           pwd
-          pipenv shell
           cd roles/WEB
-          molecule test
+          pipenv run molecule test
