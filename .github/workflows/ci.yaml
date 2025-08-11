@@ -43,5 +43,6 @@ jobs:
           pipenv run ansible-playbook correct_async.yaml
       - name: Molecule run
         run: |
-          pipenv run ansible-playbook correct_async.yaml
-          pipenv run molecule test roles/WEB
+          pipenv run molecule destroy roles/WEB
+          pipenv run molecule converge roles/WEB
+          pipenv run molecule destroy roles/WEB
