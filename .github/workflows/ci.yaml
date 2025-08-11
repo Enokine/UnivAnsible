@@ -20,6 +20,7 @@ jobs:
       - name: Linter
         run: |
           pipenv run ansible-lint roles setup_infra.yaml
+          pipenv run ansible-lint correct_async.yaml
   molecule:
     needs: linting
     runs-on: ubuntu-latest
@@ -37,7 +38,10 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install --upgrade pipenv
           pipenv install --dev "molecule-plugins[docker]"
-      - name: Molecule
+      - name: Molecule fix
+        run: |
+          pipenv run ansible-playbook correct_async.yaml
+      - name: Molecule run
         run: |
           pipenv run ansible-playbook correct_async.yaml
           pipenv run molecule test roles/WEB
