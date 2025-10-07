@@ -26,10 +26,10 @@ Vagrant.configure("2") do |config|
     node.vm.network :private_network, ip: ip
     node.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
   end
-  
+
   (1..$num_dns).each do |i|
     config.vm.define "dns-#{i}" do |node|
-      node.vm.hostname = "DNS-#{i}.lab.lan"
+      node.vm.hostname = "dns-#{i}.lab.lan"
       ip = "#{$subnet}.#{i+110}"
       node.vm.network :private_network, ip: ip
     end
@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
 
   (1..$num_web).each do |i|
     config.vm.define "web-#{i}" do |node|
-      node.vm.hostname = "WEB-#{i}.lab.lan" 
+      node.vm.hostname = "web-#{i}.lab.lan"
       ip = "#{$subnet}.#{i+120}"
       node.vm.network :private_network, ip: ip
     end
