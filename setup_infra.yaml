@@ -10,9 +10,9 @@
 - name: Installing server configurations
   hosts: all
   roles:
-    - DNS
-    - LB
-    - WEB
+    - dns
+    - lb
+    - web
 
 - name: Setup DNS all
   hosts: all
