@@ -1,11 +1,11 @@
-@ IN SOA {{ groups['DNS']|first }} {{ domain_lab }}(
-                {{ DNS_timestamp.stdout }} ; serial number
+@ IN SOA {{ groups['dns']|first }} {{ domain_lab }}(
+                {{ dns_timestamp.stdout }} ; serial number
                 30006     ; refresh period
                 360000    ; retry period
                 360000    ; expire time
                 3600 )     ; minimum TTL
 
-{% for host in groups["DNS"] %}
+{% for host in groups["dns"] %}
         IN NS {{host}}
 {% endfor %}
 

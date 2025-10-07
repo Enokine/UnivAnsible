@@ -7,12 +7,12 @@
 - name: Shell_date
   run_once: true
   ansible.builtin.shell: date +%s&
-  register: DNS_timestamp
+  register: dns_timestamp
   changed_when: timestamp.rc != 0
 
 - name: Config zone DNS
   ansible.builtin.template:
-    src: roles/DNS/templates/labzone.j2
+    src: roles/dns/templates/labzone.j2
     dest: /etc/bind/db.lab.lan
     owner: bind
     group: bind
